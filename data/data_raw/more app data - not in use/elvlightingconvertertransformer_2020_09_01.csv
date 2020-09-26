@@ -1,0 +1,21 @@
+Submit_ID,Brand,Model_No,Family Name,SoldIn,Country,Sing_or_fam,rated_power,dimmer_capability,eff_full_load,energy_perf_mark,ExpDate,GrandDate,SubmitStatus,Product Class,Availability Status,Product Website,Representative Brand URL
+92807,OSRAM,ET-PARROT 70/220-240 I,,"Australia,Fiji,New Zealand",China,Single,70.0,Trailing edge,92.35,4,2020-11-19,,Approved,,Unavailable,,http://www.ledvance.com.au
+101902,ACTEC,ACTEC ELECTRONIC TRANSFORMER,ACTEC ELECTRONIC TRANSFORMER,"Australia,Fiji,New Zealand,Other",China,Family,60.0,Trailing edge,92.5,5,2021-10-04,,Approved,Class 1,Available,http://www.sal.net.au/,http://www.sunnylighting.com.au
+101902,ACTEC,MINI105,ACTEC ELECTRONIC TRANSFORMER,"Australia,Fiji,New Zealand,Other",China,Family,60.0,Trailing edge,92.5,5,2021-10-04,,Approved,Class 1,Available,http://www.sal.net.au/,http://www.sunnylighting.com.au
+101902,ACTEC,MINI60,ACTEC ELECTRONIC TRANSFORMER,"Australia,Fiji,New Zealand,Other",China,Family,60.0,Trailing edge,92.5,5,2021-10-04,,Approved,Class 1,Available,http://www.sal.net.au/,http://www.sunnylighting.com.au
+101902,ACTEC,VENUS60,ACTEC ELECTRONIC TRANSFORMER,"Australia,Fiji,New Zealand,Other",China,Family,60.0,Trailing edge,92.5,5,2021-10-04,,Approved,Class 1,Available,http://www.sal.net.au/,http://www.sunnylighting.com.au
+103033,Brilliant Lighting,60505,,Australia,China,Single,300.0,Leading edge,92.2,4,2021-11-13,,Approved,Class 2,Available,,http://www.blinklighting.com.au
+103036,Brilliant Lighting,60507,,Australia,China,Single,400.0,Leading edge,92.24,4,2021-11-14,,Approved,Class 2,Available,,http://www.blinklighting.com.au
+103037,Brilliant Lighting,60501,,Australia,China,Single,150.0,Leading edge,89.39,3,2021-11-15,,Approved,Class 1,Available,,http://www.blinklighting.com.au
+103052,Brilliant Lighting,60503,,Australia,China,Single,200.0,Leading edge,90.41,3,2021-11-08,,Approved,Class 1,Available,,http://www.blinklighting.com.au
+103066,Brilliant Lighting,60500,,Australia,China,Single,105.0,Leading edge,86.82,3,2021-11-17,,Approved,Class 1,Available,,http://www.blinklighting.com.au
+106858,LEDVANCE,LVED VAL 40/230-240 12V,,"Australia,Fiji,New Zealand",China,Single,40.0,Leading and Trailing edge,94.72,5,2022-05-09,,Approved,Class 1,Available,http://www.ledvance.com.au,http://www.ledvance.com.au
+108009,LUCCI,TB60L 240 10-60W,,Australia,Taiwan,Single,60.0,Trailing edge,92.1,4,2022-06-09,,Approved,Class 1,Available,,http://www.beaconlighting.com.au
+108086,LUCCI,TL150S 50-150W,,Australia,Taiwan,Single,150.0,Trailing edge,94.2,5,2022-06-08,,Approved,Class 1,Available,,http://www.beaconlighting.com.au
+108592,NELSON,MTETRADE65,,"Australia,New Zealand",China,Single,65.0,Trailing edge,92.68,5,2022-09-16,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.nelsonlamps.com.au
+108593,NELSON,MTECOUGAR60,,"Australia,New Zealand",China,Single,60.0,Trailing edge,93.06,5,2022-09-23,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.nelsonlamps.com.au
+109765,NELSON,MTEMICRO60,,"Australia,New Zealand",China,Single,60.0,Trailing edge,91.98,4,2022-09-13,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.nelsonlamps.com.au
+110268,OSRAM,HTM 105/220-240,,"Australia,New Zealand",Italy,Single,105.0,Leading and Trailing edge,94.12,5,2022-12-20,,Approved,Class 1,Available,,
+121256,HPM,RGL11,,"Australia,New Zealand",China,Single,150.0,not applicable,89.53,3,2024-06-04,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.hpm.com.au/
+121257,HPM,RGLTR105,,"Australia,New Zealand",China,Single,105.0,Not applicable,88.28,3,2024-06-04,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.hpm.com.au/
+131686,HPM,RGLTR220,,"Australia,New Zealand",China,Single,200.0,Leading and Trailing edge,91.19,4,2025-08-17,,Approved,Class 1,Available,http://www.legrand.com.au/,http://www.hpm.com.au/

@@ -1,0 +1,51 @@
+Submit_ID,Brand_Reg,Model_No,Family Name,N-Reg_Date,Reg_No,SoldIn,Country,Prod_conf,input_power_min,input_power_max,decoding_type,autostandby,hdmistandby,psv_standby_power,act_standby_power,onmode_power,Apply_type_for,url,ExpDate,GrandDate,SubmitStatus,Product Class,Availability Status
+40977,PACE,DS230,,2008-11-20,ZST0001,New Zealand,China,STB STV Satellite,17.0,50.0,SD Only,,,0.0,6.02,7.7,MEPS Only,,,,Approved,Class 4,Unavailable
+46492,Ultraplus,680 Platinum,,2009-09-18,ZST0002,New Zealand,South Korea,STB STV Satellite,0.0,25.0,SD Only,,,0.0,8.784,9.984,MEPS Only,,,,Approved,Class 4,Unavailable
+46531,Ferguson,FX6600CR,,2011-09-19,ZST0003,New Zealand,South Korea,STB STV Satellite,0.0,30.0,SD Only,,,0.0,6.648,7.392,MEPS Only,,,,Approved,Class 4,Unavailable
+46532,Hyundai,HSS-760A,,2009-09-19,ZST0004,New Zealand,South Korea,STB FTA Terrestrial,0.0,30.0,SD Only,,,0.0,7.656,8.4,MEPS Only,,,,Approved,Class 1,Unavailable
+46534,Octagon,SF218,,2009-09-19,ZST0005,New Zealand,Germany,STB FTA Terrestrial,,,SD Only,,,0.0,5.712,6.504,MEPS Only,,,,Approved,Class 1,Unavailable
+46543,Satlink,2800,,2009-09-19,ZST0006,New Zealand,China,STB STV Satellite,,,SD Only,,,0.0,5.856,7.2,MEPS Only,,,,Approved,Class 4,Unavailable
+46546,Satlink,2800 12V,,2009-09-19,ZST0007,New Zealand,China,STB STV Satellite,,,SD Only,,,0.0,2.688,3.936,MEPS Only,,,,Approved,Class 4,Unavailable
+46547,Topfield,TF6000Fe,,2009-09-19,ZST0008,New Zealand,South Korea,STB STV Satellite,0.0,24.0,SD Only,,,0.0,9.984,10.608,MEPS Only,,,,Approved,Class 4,Unavailable
+46548,Topfield,TF5050CI HDMI,,2009-09-19,ZST0009,New Zealand,South Korea,STB STV Satellite,0.0,27.0,SD Only,,,0.0,9.0,10.08,MEPS Only,,,,Approved,Class 4,Unavailable
+46549,Globo,4100C,,2009-09-19,ZST0010,New Zealand,Poland,STB STV Satellite,0.0,20.0,SD Only,,,0.0,6.264,7.536,MEPS Only,,,,Approved,Class 4,Unavailable
+47816,DishTV,S7070,,2010-05-21,ZST0014,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,30.0,,SD Only,,,0.0,9.0,9.0,MEPS Only,,,,Approved,Class 1,Unavailable
+49973,KAON,KSF-A3200HR,,2010-03-14,ZST0012,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,50.0,25.0,SD Only,,,0.0,7.11,11.85,MEPS Only,,,,Approved,Class 1,Unavailable
+49974,KAON,KSF-270,,2010-03-14,ZST0011,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,,25.0,SD Only,,,0.0,9.4,11.75,MEPS Only,,,,Approved,Class 1,Unavailable
+50133,DTVS,DTVS-1B,,2010-03-18,ZST0013,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,0.0,30.0,SD Only,,,0.0,9.52,11.9,MEPS Only,,,,Approved,Class 1,Unavailable
+52042,DishTV,S7050PVR,,2010-06-14,ZST0015,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,30.0,,SD Only,,,0.0,7.0,9.0,MEPS Only,,,,Approved,Class 1,Unavailable
+52043,DishTV,S7010PVR,,2010-07-08,ZST0016,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,0.0,18.0,SD Only,,,0.0,0.1,7.0,MEPS Only,,,,Approved,Class 1,Unavailable
+53189,TRANSONIC,TWH-S1,,2010-08-09,ZST0017,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,0.0,30.0,SD Only,,,0.0,9.52,11.9,MEPS Only,,,,Approved,Class 1,Unavailable
+59555,DTVS,DTVS-DSR1,,2011-08-08,ZST0019,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,30.0,30.0,SD Only,,,0.0,8.4,9.2,MEPS Only,,,,Approved,Class 1,Unavailable
+60200,Globo,4160CX PLUS,,2011-08-08,ZST0018,New Zealand,Poland,STB STV Satellite,0.0,12.0,SD Only,,,0.0,6.264,7.536,MEPS Only,,,,Approved,Class 4,Unavailable
+61172,TRANSONIC,TC2884STB,,2011-09-23,ZST0020,New Zealand,China,STB FTA Terrestrial,,10.0,HD and SD,,,0.97,6.31,8.7,MEPS Only,,,,Approved,Class 2,Unavailable
+61515,LORANZ,LZ2911STB-USB,,2011-10-06,ZST0021,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,10.0,10.0,HD and SD,,,0.84,6.02,7.5,MEPS Only,,,,Approved,Class 2,Unavailable
+70789,Lorantz,LZ0031STB-USB,,2013-02-28,ZST0022,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,,6.0,HD and SD,,,0.376,12.0,15.0,MEPS Only,,2113-02-28,,Approved,Class 2,Unavailable
+70807,KROM,KM0037STB,,2013-02-28,ZST0023,New Zealand,China,DTV STB Free-to-air (FTA) Satellite,,6.0,HD and SD,,,0.376,12.0,15.0,MEPS Only,,2113-02-28,,Approved,Class 2,Unavailable
+96995,Netgem,N7800,,2016-03-30,AST0016,"Australia,Fiji,New Zealand",China,STB FTA Terrestrial,,,HD and SD,,,0.57,0.0,7.22,MEPS Only,,2021-03-30,,Approved,Class 2,Available
+98031,simplecontrol,VM24S,VM64S,2016-04-15,AST0017,"Australia,New Zealand",China,STB STV Cable,,,HD and SD,,,1.84,2.45,4.3,MEPS Only,,2021-04-15,,Approved,Class 3,Available
+98031,simplecontrol,VM44S,VM64S,2016-04-15,AST0017,"Australia,New Zealand",China,STB STV Cable,,,HD and SD,,,1.84,2.45,4.3,MEPS Only,,2021-04-15,,Approved,Class 3,Available
+98031,simplecontrol,VM54S,VM64S,2016-04-15,AST0017,"Australia,New Zealand",China,STB STV Cable,,,HD and SD,,,1.84,2.45,4.3,MEPS Only,,2021-04-15,,Approved,Class 3,Available
+98031,simplecontrol,VM64S,VM64S,2016-04-15,AST0017,"Australia,New Zealand",China,STB STV Cable,,,HD and SD,,,1.84,2.45,4.3,MEPS Only,,2021-04-15,,Approved,Class 3,Available
+99963,Fetch TV,H626T,,2016-07-05,AST0018,Australia,China,STB FTA Terrestrial,0.3,24.0,HD and SD,,,0.6,5.4,6.54,MEPS Only,,2021-07-05,,Approved,Class 2,Available
+100755,Dynalink,A 2856,,2016-07-26,AST0019,"Australia,Fiji",China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,2.0,0.0,4.8,MEPS Only,,2021-07-26,,Approved,Class 2,Available
+100991,LeEco,LBA-020-WW,,2016-08-02,AST0020,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.35,1.51,5.42,MEPS Only,,2021-08-02,,Approved,Class 2,Available
+101386,Thomson,DH1685,DH1685P,2016-08-17,AST0021,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.34,3.162,3.327,MEPS Only,,2021-08-17,,Approved,Class 2,Available
+101386,Thomson,DH1685P,DH1685P,2016-08-17,AST0021,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.34,3.162,3.327,MEPS Only,,2021-08-17,,Approved,Class 2,Available
+101386,Target,DH1685P,DH1685P,2016-08-17,AST0021,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.34,3.162,3.327,MEPS Only,,2021-08-17,,Approved,Class 2,Available
+101777,DishTV,T2100,,2016-09-13,AST0022,"Australia,Fiji,New Zealand",China,STB FTA Terrestrial,,,HD and SD,,,0.47,0.0,6.11,MEPS Only,,2021-09-13,,Approved,Class 2,Available
+105986,Linden,LHDSTB17,,2017-03-28,AST0023,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.36,3.28,3.652,MEPS Only,,2022-03-28,,Approved,Class 2,Available
+107476,LG,STB-5500-GB,,2017-06-16,AST0024,"Australia,New Zealand",South Korea,STB FTA Terrestrial,,,HD and SD,,,0.16,0.0,12.9,MEPS Only,,2022-06-16,,Approved,Class 2,Unavailable
+110714,Altech UEC,DSD 4921 RV,DSD 4921 RV,2017-10-31,AST0025,"Australia,Fiji,New Zealand",South Africa,STB STV Satellite,,,HD and SD,,,0.0,5.5,5.85,MEPS Only,,2022-10-31,,Approved,Class 4,Available
+110714,Altech UEC,DSD 4921 TVPLUS,DSD 4921 RV,2017-10-31,AST0025,"Australia,Fiji,New Zealand",South Africa,STB STV Satellite,,,HD and SD,,,0.0,5.5,5.85,MEPS Only,,2022-10-31,,Approved,Class 4,Available
+110750,Telstra TV,4700TL,,2017-11-01,AST0026,Australia,China,STB FTA Terrestrial,,,HD and SD,,,1.87,0.0,2.94,MEPS Only,,2022-11-01,,Approved,Class 2,Available
+111275,TEAC,HDB860,,2018-02-05,AST0028,Australia,China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,0.63,0.61,7.64,MEPS Only,,2023-02-05,,Approved,Class 2,Available
+111756,Linden,LHDSTB17a,,2017-12-22,AST0027,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.41,3.911,4.253,MEPS Only,,2022-12-22,,Approved,Class 2,Available
+114088,GIEC,GK-BHT1535,OTA streamer.,2018-05-04,AST0029,"Australia,Fiji,New Zealand",China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,0.42,0.0,3.4,MEPS Only,,2023-05-04,,Approved,Class 2,Unavailable
+114088,GIEC,OTA streamer.,OTA streamer.,2018-05-04,AST0029,"Australia,Fiji,New Zealand",China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,0.42,0.0,3.4,MEPS Only,,2023-05-04,,Approved,Class 2,Unavailable
+114088,GIEC,SRT5434,OTA streamer.,2018-05-04,AST0029,"Australia,Fiji,New Zealand",China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,0.42,0.0,3.4,MEPS Only,,2023-05-04,,Approved,Class 2,Unavailable
+119907,TEAC,TSB100,,2019-04-11,AST0030,Australia,China,STB FTA Terrestrial,,,HD and SD,,,0.135,3.99,3.99,MEPS Only,,2024-04-11,,Approved,Class 2,Available
+122759,Linsar,LSSTB,,2019-07-16,AST0031,"Australia,Fiji,New Zealand",China,STB FTA Terrestrial,,,HD and SD,,,0.21,0.21,4.33,MEPS Only,,2024-07-16,,Approved,Class 2,Available
+125645,ADB,ADB-2675STWFV,,2019-12-24,AST0032,Australia,Thailand,STB STV Satellite,,,HD and SD,,,11.31,5.0,12.39,MEPS Only,,2024-12-24,,Approved,Class 4,Available
+127940,DishTV,A7070,,2020-03-26,ZST0024,"Australia,Fiji,New Zealand",China,STB FTA Terrestrial,,,HD and SD,,,1.0,0.42,4.1,MEPS Only,,2120-03-26,,Approved,Class 2,Available
+131834,LASER,STB-7000,,2020-08-27,AST0033,Australia,China,DTV STB Free-to-air (FTA) Satellite,,,HD and SD,,,0.392,0.0,2.63,MEPS Only,,2025-08-27,,Approved,Class 2,Available

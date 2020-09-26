@@ -1,0 +1,524 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(magrittr)
+library(dplyr)
+```
+
+##APPLIANCES
+
+###AIRCON
+```{r}
+## input kWs, - Only ratings given for years other than 2019 (the seasonal kWs ONLY has 2019 values)
+## input kWs calc's as average of hot and cool:
+## (var 80) Rated.cooling.power.input.kW "This is the rated power input at 35 °C (T1) at full capacity operation in watts." 
+## (var 97) Rated.heating.power.input.kW "This is the rated power input at 7 °C (H1) at full capacity operation in watts."
+## whole star ratings pre-2019, calc'd as average of hot and cool, re-scaled and rounded on 0-5 scale:
+## (vars 44/45) Star2010_Cool "This is the value that determines the Energy Rating Label for cooling post 2010. Replaced for registrations under the 2019 Determination by the three “c_star_***”, below."
+## sold in Aus
+## reverse cycle only (not heating/cooling only)
+## remove 7 star ratings (i think this is an error, there are only 2)
+## assume zero star is a valid rating
+## ADDITIONAL ATTRIBUTES: 
+## Configuration1 - ducted or non-ducted
+
+aircon <- read.csv("./data_raw/ac_2020_09_23.csv")
+# aircon %>% names
+# aircon[, c(9,49,54,57)] %>% summary #ducted/nonducted, countries sold, type, demand response
+# aircon[, c(132:137,147:149,161:163)] %>% summary #total electricity use (kWh) for season **Not using as only records for 2019
+
+ac <- aircon[which(aircon$Sold_in %in% names(table(aircon$Sold_in))[2:5] & 
+                     aircon$Type == "Reverse Cycle"), c(9,80,97,44,45)]
+
+# apply(ac, 1, function(x){any(is.na(x))}) %>% sum #number of rows with na's 1234
+ac <- ac[!apply(ac, 1, function(x){any(is.na(x))}), ] #remove na rows
+ac$app <- "aircon"
+ac$app <- as.factor(ac$app)
+##boxplot below shows similar dist of energy use for heating and cooling - justify aggregation
+# boxplot(c(ac$Rated.cooling.power.input.kW, ac$Rated.heating.power.input.kW)~c(rep("cool", nrow(ac)), rep("heat", nrow(ac))))
+ac$powerkW <- (ac$Rated.cooling.power.input.kW+ac$Rated.heating.power.input.kW)/2 #average power use of heat and cool
+ac$star <- (ac$Star2010_Cool+ac$Star2010_Heat)/2 #average star rating of heat and cool
+ac$star <- (ac$star/max(ac$star)*5) %>% round(0) #scale and round star rating from 0-5
+
+# ac %>% summary
+boxplot(ac$powerkW~ac$Configuration1)
+boxplot(ac$powerkW~ac$star)
+# hist(ac$powerkW)
+
+ac <- ac[,c(6:8,1)]
+write.csv(ac, "./data_clean/aircon.csv", row.names = FALSE)
+# ac[,c(6:8,1)] %>% summary
+```
+
+###CLOSED CONTROL AIRCON
+```{r}
+aircon2 <- read.csv("./data_raw/cc_2020_09_23.csv")
+# aircon2 %>% names
+
+# aircon2[, c(15,21)] %>% summary
+## 15 Rated.Power.Input - Rated effective electrical power input (kW)
+## 21 Variable.output.compressor - "Indicates whether the Close Control Air Conditioner has a variable output compressor. Close control air-conditioner models with a "Variable Output Compressor" have a variable speed drive, which enables the compressor to run at a range of speeds from slow to fast, to match the output required."
+## no star rating
+
+cc <- aircon2[which(aircon2$Sold_in %in% names(table(aircon2$Sold_in))[c(1,2)]), c(15,21)]
+
+cc$app <- "closed_control"
+cc$app <- as.factor(cc$app)
+
+cc$powerkW <- cc$Rated.Power.Input
+
+# cc %>% summary 
+boxplot(cc$powerkW~cc$Variable.output.compressor)
+
+cc <- cc[,c(3,4,2)]
+write.csv(cc, "./data_clean/aircon_closedcontrol.csv", row.names = FALSE)
+```
+
+###CLOTHES DRYER
+```{r}
+## sold in Aus
+## energy use reported as energy(kWs) per use based on (var 12) New.CEC "This is the current Comparative Energy Consumption of the product which is its nominal energy consumption expressed as kilowatt hours per years." - Kwh per 52 uses
+## (var 14) New.Star "The current Star Rating for the appliance as found on the Energy Rating Label"
+## stars scaled and rounded on 1-5 scale
+## Average duration 212.3 mins
+# mean(cd$Prog.Time)
+## dryers only, not combination washer/dryer
+## ADDITIONAL ATTRIBUTES: 
+## Cap - capacity (kgs)
+## Prog.Time - duration of cycle in minutes
+
+dryer <- read.csv("./data_raw/cd_2020_09_23.csv")
+# dryer %>% names
+
+# dryer[, c(3,4,15,16,21,22)] %>% summary #capacity Kg, is combination washer/dryer?, setting, duration (mins), water consumption, type
+
+dryer$powerkW <- dryer$New.CEC/52 #kws per use
+
+cd <- dryer[which(dryer$Sold_in %in% names(table(dryer$Sold_in))[2:5] & dryer$Combination == "False"), c(14,33,3,16)]
+
+cd$app <- "clothes_dryer"
+cd$app <- as.factor(cd$app)
+colnames(cd)[1] <- "star"
+cd$star <- (cd$star/max(cd$star)*5) %>% round(0) #scale and round star rating from 0-5
+
+# cd %>% summary
+boxplot(cd$powerkW~cd$star)
+plot(cd$powerkW~cd$Cap) ##Something weird happening with capacity? two trends
+plot(cd$powerkW~cd$Prog.Time)
+
+cd <- cd[,c(5,2,1,3,4)]
+write.csv(cd, "./data_clean/clothes_dryer.csv", row.names = FALSE)
+```
+
+###CLOTHES WASHER
+```{r}
+## Kws per use:
+## 7 CEC_ "This is the current Comparative Energy Consumption for the product on warm wash expressed as kilowatt hours per years."
+## - extra notes: "This is a comparative figure that indicates the amount of electricity used to operate the clothes washer 365 times (nominally 1 year's use) using a ‘normal’ or equivalent wash program and a minimum wash temperature of 35 degrees C at the start of the wash cycle."
+## Average duration  mins
+# mean(cw$Test.Prog.Time) #207.7 mins
+## star ratings as-is, already on 0-5 scale (actually 1-5, again, is zero rating valid?)
+## 39 New.Star "The current Star Rating for the appliance as found on the Energy Rating Label"
+## only uses first drum, remove two drums? (haven't)
+## notes and attribute names do not match
+## only for warm wash
+## one significant outlier (haven't removed)
+## sold in Aus
+## cec for warm wash
+## washing only, no combination washer/dryer
+## ADDITIONAL ATTRIBUTES: 
+## internal.heater
+## Prog.Time - duration of cycle in minutes
+## Type - drum/non-drum
+
+washer <- read.csv("./data_raw/cw_2020_09_23.csv")
+# washer %>% names
+# washer[, c(13,28,48,54,56,52)] %>% summary #combination washer/dryer, internal heater, standby power use, total water consumption, type, test program duration time,
+
+washer$powerkW <- washer[,7]/365 #kws per use
+
+cw <- washer[which(washer$Sold_in %in% names(table(washer$Sold_in))[2:5] & washer$Combination == "False"), c(39,80,28,56,52)]
+
+cw$app <- "clothes_washer"
+cw$app <- as.factor(cw$app)
+colnames(cw)[1] <- "star"
+cw$star <- cw$star %>% round(0) #round star rating from 0-5
+
+# cw %>% summary
+boxplot(cw$powerkW~cw$star)
+boxplot(cw$powerkW~cw$internal_heater)
+boxplot(cw$powerkW~cw$Type)
+plot(cw$powerkW~cw$Test.Prog.Time)
+
+cw <- cw[,c(6,2,1,3:5)]
+write.csv(cw, "./data_clean/clothes_washer.csv", row.names = FALSE)
+```
+
+##COMPUTER MONITOR
+```{r}
+##doesnt give very accurate usage measure
+##does my estimate match expectations?
+## Kws per day based on yearly use:
+## (var 10) Comparative.Energy.Consumption "This is the current Comparative Energy Consumption of the product which is it's nominal energy consumption expressed as kilowatt hours per years."
+## - extra notes: "This is a comparative figure that indicates the amount of electricity used to operate the Computer Monitor over a typical year. It is based on testing conducted on the model to the relevant Australian Standard. This figure can be used as a guide to the typical running costs of a model. Multiply this figure by your electricity tariff to provide an estimate of the appliances running costs. The actual energy used and running costs will depend on how many hours per day you operate the Computer Monitor.
+## star rating rescaled and rounded on 0-5 scale
+## (var 13) Star.Rating "The current Star Rating for the appliance as found on the Energy Rating Label"
+## sold in Aus
+## ADDITIONAL ATTRIBUTES: 
+## Screen.Size - diagonal (cm)
+## Screen.Technology - LCD/LED/OLED
+
+monitor <- read.csv("./data_raw/mo_2020_09_23.csv")
+# monitor %>% names
+# monitor[, c(8,9,11)] %>% summary #diag screen size (cm), screen tech, active standby power use
+
+monitor$powerkW <- monitor[,10]/365 #use per day
+
+mo <- monitor[which(monitor$Selling.Countries %in% names(table(monitor$Selling.Countries))[2:5]), c(13,20,8,9)]
+
+mo$app <- "computer_monitor"
+mo$app <- as.factor(mo$app)
+colnames(mo)[1] <- "star"
+mo$star <- (mo$star/max(mo$star)*5) %>% round(0) #scale and round star rating from 0-5
+# mo %>% summary
+
+boxplot(mo$powerkW~mo$star)
+plot(mo$powerkW~mo$Screen.Size)
+boxplot(mo$powerkW~mo$Screen.Technology)
+
+mo <- mo[,c(5,2,1,3,4)]
+write.csv(mo, "./data_clean/computer_monitor.csv", row.names = FALSE)
+```
+
+##DISH WASHER
+```{r}
+## kws per use:
+## 4 CEC_ "This is the Comparative Energy Consumption of the product which is it's nominal energy consumption expressed as kilowatt hours per years."
+## - extra notes: "This is a comparative figure that indicates the amount of electricity used to operate the dishwasher 365 times (nominally 1 year's use) using the nominated program. It is based on testing conducted on the model to the relevant Australian Standard and includes the electricity used by the washer during the cycle and energy used if any to heat water from the homes hot water service"
+## average duration - 159.9 mins
+# mean(dw$Prog.Time)
+## star ratings scaled and rounded from 0-5
+## 15 New.Star "The Star Rating for the appliance as found on the Energy Rating Label"
+## sold in Aus
+## only where program time >0
+## remove 6 star ratings, 4 rows, all the same
+## ADDITIONAL ATTRIBUTES: 
+## Prog.Time - duration of cycle in minutes
+
+dishwash <- read.csv("./data_raw/dw_2020_09_23.csv")
+# dishwash %>% names
+
+# dishwash[, c(5,19,21,24,25,26)] %>% summary #water connection type, program time, standby power use, total water consumption, type, water softener
+
+dishwash$powerkW <- dishwash$CEC_/365 #energy per use (kws)
+
+dw <- dishwash[which(dishwash$Sold_in %in% names(table(dishwash$Sold_in))[2:6] & 
+                       dishwash$Prog.Time != 0 &
+                       !dishwash$New.Star==6), c(15,38,19)]
+
+dw$app <- "dishwasher"
+dw$app <- as.factor(dw$app)
+colnames(dw)[1] <- "star"
+dw$star <- (dw$star/max(dw$star)*5) %>% round(0) #scale and round star rating from 0-5
+
+# dw %>% summary
+boxplot(dw$powerkW~dw$star)
+plot(dw$powerkW~dw$Prog.Time)
+
+dw <- dw[,c(4,2,1,3)]
+write.csv(dw, "./data_clean/dishwasher.csv", row.names = FALSE)
+```
+
+##HOT WATER ELEC
+```{r}
+## no notes for attributes
+## do the per hour values match expected values?
+## no star ratings
+## energy use per day based on:
+## 6 Decl.Stand.Heat rated declared heat loss "kwH/24h"
+## no real idea how long a days worth of hot water actually represents...
+## ADDITIONAL ATTRIBUTES: 
+## adjust_temp - adjustable temperature?
+## Gross.Store.Cap - storage capacity?
+## Heating.Elements - number of heating elements
+
+waterelec <- read.csv("./data_raw/hw_2020_09_23.csv")
+# waterelec %>% names
+
+# waterelec[, c(1,8,9,23)] %>% summary #adjust temp, Gross.Store.Cap, heating elements,type
+
+waterelec$powerkW <- waterelec$Decl.Stand.Heat #Kws per day
+
+# waterelec$powerkW %>% summary
+
+hw <- waterelec[which(waterelec$Sold_in %in% names(table(waterelec$Sold_in))[2:5]), c(32,1,8,9)]
+## sold in Aus
+
+hw$app <- "hotwater_electric"
+hw$app <- as.factor(hw$app)
+# hw %>% summary
+
+boxplot(hw$powerkW~hw$adjust_temp)
+plot(hw$powerkW~hw$Gross.Store.Cap)
+boxplot(hw$powerkW~hw$Heating.Elements)
+
+hw <- hw[,c(5,1:4)]
+write.csv(hw[,c(5,1:4)], "./data_clean/hotwater_electric.csv", row.names = FALSE)
+```
+
+##INCANDESCENT LAMPS
+```{r}
+## power use in kW per hour (converted from Watts):
+## 8 nom_lamp_power "This is the total electrical input power (watts) required to operate the lamp"
+## sold in Aus
+
+incandescent <- read.csv("./data_raw/in_2020_09_23.csv")
+# incandescent %>% names
+
+# incandescent[, c(9:14,8)] %>% summary
+## 9 avg_meas_lum_flux "This is a measure of the light output or nominal luminous flux of the lamp in lumens. The higher the value the greater the light output"
+## 10 median_lamp_life "The claimed median lamp life in hours"
+## 11 lumen_maintenance "This is a measure of the light output of the lamp measured at 75% of the rated lamp life and is expressed as a decimal proportion of the output when the lamp is new"
+## 12 avg_meas_efficacy "The ratio of lamp light output (in lumens) to the electric power used by the lamp. The higher the value the more efficient the lamp"
+## 13 inputvolt_min, 
+## 14 inputvolt_max
+
+incandescent$powerkW <- incandescent$nom_lamp_power/1000 #Kws per hour
+# incandescent$powerkW %>% summary
+
+
+il <- cbind("powerkW" = incandescent$powerkW[which(incandescent$SoldIn %in% names(table(incandescent$SoldIn))[2:4])], 
+            "app" = rep("lights_incandescent")) %>% as.data.frame
+
+il$app <- as.factor(il$app)
+# il %>% summary
+
+il <- il[,c(2,1)]
+write.csv(il[,c(2,1)], "./data_clean/lights_incandescent.csv", row.names = FALSE)
+```
+
+##LINEAR FLORESCENT LAMPS
+```{r}
+## no notes, no idea what a lot of the attributes mean *rolls eyes*
+## energy is kWs per hour, converted from Watts:
+## 9 nom_watt "nominal lamp wattage"
+## sold in Aus
+
+flourescent <- read.csv("./data_raw/lf_2020_09_23.csv")
+# flourescent %>% names
+
+# flourescent[, c(4,8,10:16,27,9)] %>% summary
+## 4 Lamp_Freq "nominal frequency"
+## 8 nom_len "Nominal lamp length in mm."
+## 10 Rated_CRI "Colour Rendering Index. A measure of the ability of the lamp to faithfully render colours. The higher the value (range = 0 to 100) the closer the colour rendering properties of the lamp match that of natural daylight (=100)."
+## 11 Rated_IE "The ratio of lamp lumen output to the power dissipated in the lamp under specified conditions of measurement. Initial efficacy refers to the efficacy after 100 hours of operation of the lamp. The higher the value the more efficient the lamp."
+## 12 Rated_IL ??
+## 13 Rated_ILW ??
+## 14 Rated_ME ??
+## 15 Rated_ML ??
+## 16 Rated_MLW ??
+## 27 Nominal.Diameter..m. ??
+
+flourescent$powerkW <- flourescent$nom_watt/1000 #Kws per hour
+
+fl <- flourescent[which(flourescent$Sold_in %in% names(table(flourescent$Sold_in))[1:3]), c(1,28)]
+
+fl$app <- "lights_flourescent_linear"
+fl$app <- as.factor(fl$app)
+# fl %>% summary
+
+fl <- fl[,c(3,2)]
+write.csv(fl, "./data_clean/lights_flourescent_linear.csv", row.names = FALSE)
+```
+
+##COMPACT FLOURESCENT LAMPS
+```{r}
+## sold in aus
+## Energy is kWs per hour converted from Watts
+## 29 nom_lamp_power Watts
+## removed lamp power of over 100 watts, seem to be outliers?
+## ADDITIONAL ATTRIBUTES: 
+## Sing_or_fam - covering?
+
+compact <- read.csv("./data_raw/cf_2020_09_23.csv")
+# compact %>% names
+
+compact$powerkW <- compact$nom_lamp_power/1000 #Kws per hour
+
+# compact$SoldIn %>% unique #outliers
+# compact[which(compact$nom_lamp_power>100),]
+cf <- compact[which(compact$SoldIn %in% names(table(compact$SoldIn))[c(2,3,4:7)] &
+                      compact$nom_lamp_power<100), c(10,29)]
+
+cf$app <- "lights_flourescent_compact"
+cf$app <- as.factor(cf$app)
+
+# cf %>% summary
+boxplot(cf$powerkW~cf$Sing_or_fam)
+
+cf <- cf[,c(3,2,1)]
+write.csv(cf, "./data_clean/lights_flourescent_compact.csv", row.names = FALSE)
+```
+
+##FRIDGE/FREEZERS
+```{r}
+## only has pre-2010 star values in dataset...
+## sold in Aus
+## fridge/freezer type, not fridge only or freezer only
+## has a star rating
+## Energy reported as kWs per day, converted from yearly estimate
+## 4 CEC_ "This is the Comparative Energy Consumption of the product which is it's nominal energy consumption expressed as kilowatt hours per years."
+## - extra notes: "This is a comparative figure that indicates the amount of electricity used to operate the refrigerator or freezer over a typical year. It is based on testing conducted on the model to the relevant Australian Standard."
+## stars scaled and rounded to 0-5 scale and whole number ratings
+## 21 Star2009 "This is the value that determines the Energy Rating Label for the product prior to 2010"
+## ADDITIONAL ATTRIBUTES: 
+## Adaptive.Defrost
+## Configuration
+## Designation
+## Tot.Vol - fridge volume
+
+fridge <- read.csv("./data_raw/rf_2020_09_23.csv")
+# fridge %>% names
+
+# fridge[, c(1,8,11,29)] %>% summary #1 adaptive defrost, 8 configuration, 11 designation (type), 29 total volume
+
+fridge$powerkW <- fridge[,4]/365 #energy per day (KW)
+
+rf <- fridge[which(fridge$Sold_in %in% names(table(fridge$Sold_in))[2:6] & fridge$Designation == "Refrigerator/Freezer" & !is.na(fridge$Star2009)), c(21,45,1,8,29)]
+
+rf$app <- "fridge_freezer"
+rf$app <- as.factor(rf$app)
+colnames(rf)[1] <- "star"
+rf$star <- (rf$star/max(rf$star)*5) %>% round(0) #scale and round star rating from 0-5
+# rf %>% names
+
+boxplot(rf$powerkW~rf$star)
+boxplot(rf$powerkW~rf$Adaptive.Defrost)
+boxplot(rf$powerkW~rf$Configuration)
+plot(rf$powerkW~rf$Tot.Vol)
+
+rf <- rf[,c(6,2,1,3,4,5)]
+write.csv(rf[,c(6,2,1,3:5)], "./data_clean/fridge_freezer.csv", row.names = FALSE)
+```
+
+##TELEVISION
+```{r}
+## energy as kwH per day, based on assumed 10 hours per day
+## 16 CEC - This is the current Comparative Energy Consumption of the product which is it's nominal energy consumption expressed as kilowatt hours per years.
+## more notes: This is a comparative figure that indicates the amount of electricity used to operate the Television over a typical year (assuming 10 hours viewing per day). It is based on testing conducted on the model to the relevant Australian Standard.
+## stars scaled and rounded to 0-5 scale and whole number ratings
+## 22 Star2 - This is the actual star rating of the television.
+## ADDITIONAL ATTRIBUTES:
+## 28 Power.supply
+## 29 Tuner.Type
+## 7 screensize - The diagonal measurement of the screen in cm
+## 9 Screen_Tech - This is the type of screen technology (LCD, Plasma, OLED, etc…)
+
+telly <- read.csv("./data_raw/tv_2020_09_23.csv")
+# telly %>% names
+
+# telly[, c(7,9,13,16,22,28,29)] %>% summary #screensize, screen area, screen tech, aaverage power mode, cec, star, power supply, tuner type
+
+telly$powerkW <- telly$CEC/365 #energy per day (KW) for assumed 10 hours viewing per day
+
+tv <- telly[which(telly$SoldIn %in% names(table(telly$SoldIn))[c(1,4:6)]), c(22,32,7,9,28,29)]
+
+tv$app <- "television"
+tv$app <- as.factor(tv$app)
+colnames(tv)[1] <- "star"
+tv$star <- (tv$star/max(tv$star)*5) %>% round(0) #scale and round star rating from 0-5
+# tv %>% summary
+
+boxplot(tv$powerkW~tv$star)
+plot(tv$powerkW~tv$screensize)
+boxplot(tv$powerkW~tv$Screen_Tech)
+boxplot(tv$powerkW~tv$Power.supply)
+boxplot(tv$powerkW~tv$Tuner.Type)
+
+tv <- tv[,c(7,2,1,3:6)]
+write.csv(tv, "./data_clean/television.csv", row.names = FALSE)
+```
+
+
+
+```{r}
+## apps and their usage only
+apps <- rbind(ac[,c(1,2)],cc[,c(1,2)],cd[,c(1,2)],
+              cf[,c(1,2)],cw[,c(1,2)],dw[,c(1,2)],
+              fl[,c(1,2)],hw[,c(1,2)],il[,c(1,2)],
+              mo[,c(1,2)],rf[,c(1,2)],tv[,c(1,2)])
+apps$powerkW <- apps$powerkW %>% as.numeric()
+
+moreapps <- read.csv("./data_raw/apps_nonstar.csv")
+# moreapps %>% summary
+```
+
+```{r}
+#KWs per hour
+moreapps %>% 
+  group_by(app) %>% 
+  summarize(
+  mean_kW = mean(watts/1000)) %>% rbind(
+    
+    (apps %>% 
+  group_by(app) %>% 
+  summarize(#min = min(powerkW),
+            #q1 = quantile(powerkW, 0.25),
+            #median = median(powerkW),
+            mean_kW = mean(powerkW),
+            #q3 = quantile(powerkW, 0.75),
+            #max = max(powerkW)
+            ) %>% arrange(app))
+  )
+
+
+
+```
+
+
+##ELECTRICITY PRICE
+```{r}
+## https://www.canstarblue.com.au/electricity/perth-electricity-prices/
+## https://www.wa.gov.au/organisation/energy-policy-wa/household-electricity-pricing
+
+baseCharge <- 28.8229 #synergy single rate tariff, charge per kWh (cents)
+
+## variable rate per time of day
+## using weekday shoulder use (7am and 3pm), weekend shoulder hours differ (7am and 9pm)
+hourlyCharge <- data.frame("hour" = c(0:23),
+                    "category" = c(rep("offPeak",7), rep("shoulder",8),
+                                   rep("peak", 6), rep("offPeak", 3)),
+                    "rateCentsPerHr" = c(rep(15.1002,7), rep(28.7076,8),
+                                   rep(54.8142, 6), rep(15.1002, 3)))
+
+supplyCharge <- 103.3263 #synergy charge per day (cents)
+```
+
+
+##EMISSIONS FACTOR
+```{r}
+## https://www.environment.gov.au/system/files/resources/5a169bfb-f417-4b00-9b70-6ba328ea8671/files/national-greenhouse-accounts-factors-july-2017.pdf
+## kg per kWh electricity
+
+emissionFactor <- data.frame("location" = c("NSW", "ACT", "VIC", "QLD", "SA", "SWA", "NWA", "KatherineNT", "TAS", "NT"),
+                             "factor" = c(0.83,0.83,1.08,0.79,0.49,0.7,0.62,0.59,0.14,0.64))
+emissionFactor
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
