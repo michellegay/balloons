@@ -1,0 +1,21 @@
+attribute_name,data_type,attribute_description
+co2_kgs_per_use,FLOAT,Amount CO2 emissions (kgs) per typical use of appliance
+balloons_per_use,FLOAT,Number of balloons full of CO2 generated per typical use of appliance
+mean_kW,FLOAT,Average energy use (kWs) for appliance per unit of time/use
+app,FACT,Appliance name (id)
+active,BOOL,Is appliance appearing in visualisation? (T/F)
+room,FACT,Location of appliance in house.
+data_source_link,STR,"Direct link to download the appliance energy use data, if applicable."
+data_download_date,DATE,Date appliance energy use data aquired.
+attribute_notes_html_link,STR,Link to attribute description on the web.
+attribute_notes_docx_link,STR,"Direct link to download a docx attribute description (when both html and docx provided, they are different)."
+attribute_notes_download_date,DATE,Date attribute data aquired.
+energy_units_kW,FACT,Unit of time for reported energy use in KWs
+hrs_per_use,FLOAT,Default duration of time (hrs) appliance would be in use during a single use. In the game appliance will run for this duration of time before turning off. Should be equal to the number of hours use in a typical day.
+expected_use_W,STR,"Based on a google search and reasonable assumption, these are approximately the expected energy use value or range of values (Watts) for each appliance. For validating the average values calculated from the energy star rating data and random sampling of items for sale online."
+star,BOOL,Does appliance have an energy star rating? (T/F)
+df_id,FACT,Variable name of individual appliance dataframes in 'cleaning.Rmd'.
+notes,STR,Additional appliance notes.
+per_use_multiplier,FLOAT,"Multiplier for calculating CO2 (kg) per use, e.g. a kettle gives energy in kWh, but a kettle only stays on for ~0.1 hour, multiplication factor = 0.1"
+use_per_day,INT,"Numer of times appliance gets used in a typical day, duration of each use is equal to 'hrs_per_use' value"
+category,FACT,Type of appliance for visualisation purposes

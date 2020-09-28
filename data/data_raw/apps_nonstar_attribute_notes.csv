@@ -1,0 +1,6 @@
+attribute_name,data_type,attribute_description
+app,FACT,"Appliance name."
+watts,INT,"Reported energy use of appliance (Watts)."
+price,INT,"Price of appliance (AUD) at time of data aquisition from source."
+source,STR,"Link to individual appliance sales page where specs include reported energy use (id)."
+notes,STR,"Additional appliance notes."

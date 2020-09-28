@@ -1,0 +1,5 @@
+"attribute_name","attribute_description"
+"variable_rate_category","Rate category based on time of day, 'off peak' 9pm-7am, 'shoulder' 7am-3pm, 'peak' 3pm-9pm. Using weekday shoulder use (7am to 3pm), weekend shoulder hours differ (7am to 9pm)."
+"variable_rate_cents_per_kWh","Variable cost of electricity per kWh for corresponding time of day (cents)."
+"fixed_rate_cents_per_kWh","Fixed cost of electiricity, is constant all day (cents)."
+"daily_supply_charge_cents","Daily Synergy supply charge (cents)."
