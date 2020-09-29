@@ -665,36 +665,29 @@ co2 <- read.csv("apps_ref.csv")
 # install.packages("treemap")
 # install.packages("d3Tree")
 library(treemap)
-# library(d3Tree)
+library(d3Tree)
+library(plotly)
  
 data <- data.frame("group" = as.factor(co2$category),
                    "subgroup" = as.factor(co2$app),
-                   "value" = round((co2$balloons_per_use*
-                                      co2$use_per_day),2))[which(!is.na(co2$category)),]
-# data
+                   "num_balloons" = round((co2$balloons_per_use*
+                                      co2$use_per_day),2))
+data
 # basic treemap
-tree <- treemap(data,
+tree <- treemap(data[which(!is.na(data$num_balloons)),],
         index=c("group","subgroup"),
-        vSize="value",
-        # vColor = "group",
+        vSize="num_balloons",
         type="index",
-            align.labels=list(
-             c("center", "center"),
-             c("right", "bottom")))
+        align.labels=list(
+           c("center", "center"),
+           c("right", "bottom")))
 
-
-# make it interactive ("rootname" becomes the title of the plot):
-# inter <- d3tree(list(root = df2tree(rootname="category",
-#                                     struct=data)))
-# inter
-# 
+d3tree(tree,name = c("group", "subgroup"), value = "num_balloons")
 # # save the widget
 # library(htmlwidgets)
 # saveWidget(inter, file="interactiveTreemap.html")
 
 ```
-
-
 
 
 
