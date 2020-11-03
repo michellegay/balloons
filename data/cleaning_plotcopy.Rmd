@@ -540,17 +540,16 @@ apps$powerkW <- apps$powerkW %>% as.numeric()
 ```
 
 ```{r}
-# apps_list <- list(ac,cd,cf,cw,dw,fl,hw,il,mo,rf,tv,moreapps[,c(1,5:12)])
-# apps_wide <- Reduce(
-#   function(x, y, ...) merge(x, y, all = TRUE, ...),
-#   apps_list
-# )
-# apps_wide$id <- c(1:nrow(apps_wide))
-# apps_wide %>% summary
-# 
-# apps_long <- melt(data = apps_wide, id.vars = "id", 
-#                   variable.name = "attribute",
-#                   value.name = "value", na.rm = TRUE)
+apps_list <- list(ac,cd,cf,cw,dw,fl,hw,il,mo,rf,tv,moreapps[,c(1,5:12)])
+apps_wide <- Reduce(
+  function(x, y, ...) merge(x, y, all = TRUE, ...),
+  apps_list
+)
+apps_wide$id <- c(1:nrow(apps_wide))
+apps_wide
+apps_long <- melt(data = apps_wide, id.vars = "id", 
+                  variable.name = "attribute",
+                  value.name = "value", na.rm = TRUE)
 # apps_long[which(apps_long$id==1),]
 ```
 
@@ -565,29 +564,30 @@ write.csv(cleaning_notes, "cleaning_notes.csv", row.names = FALSE)
 ```
 
 ```{r}
-## add average energy use per appliance to apps_ref
+## add average energy use per appliance to apps_ref.csv
 
-apps_ref <- moreapps %>%
-  group_by(app) %>%
-  summarize(
-  mean_kW = mean(watts/1000)) %>% rbind(
-
-    (apps %>%
-  group_by(app) %>%
-  summarize(#min = min(powerkW),
-              #q1 = quantile(powerkW, 0.25),
-            #median = median(powerkW),
-            mean_kW = mean(powerkW),
-            #q3 = quantile(powerkW, 0.75),
-            #max = max(powerkW)
-            ) %>% arrange(app))
-  ) %>% full_join(read.csv("./data_raw/apps_ref_0.csv"))
-
-data.frame("attribute_name" = "mean_kW",
-             "data_type" = "FLOAT",
-             "attribute_description" = "Average energy use (kWs) for appliance per unit of time/use") %>%
-  rbind(read.csv("./data_raw/apps_ref_0_attribute_notes.csv")) %>%
-  write.csv("apps_ref_attribute_notes.csv", row.names = FALSE)
+# moreapps %>%
+#   group_by(app) %>%
+#   summarize(
+#   mean_kW = mean(watts/1000)) %>% rbind(
+# 
+#     (apps %>%
+#   group_by(app) %>%
+#   summarize(#min = min(powerkW),
+#             #q1 = quantile(powerkW, 0.25),
+#             #median = median(powerkW),
+#             mean_kW = mean(powerkW),
+#             #q3 = quantile(powerkW, 0.75),
+#             #max = max(powerkW)
+#             ) %>% arrange(app))
+#   ) %>% full_join(read.csv("apps_ref.csv")) %>%
+#   write.csv("apps_ref.csv", row.names = FALSE)
+# 
+# data.frame("attribute_name" = "mean_kW",
+#              "data_type" = "FLOAT",
+#              "attribute_description" = "Average energy use (kWs) for appliance per unit of time/use") %>%
+#   rbind(read.csv("apps_ref_attribute_notes.csv")) %>%
+#   write.csv("apps_ref_attribute_notes.csv", row.names = FALSE)
 ```
 
 ## ELECTRICITY PRICES
@@ -655,26 +655,24 @@ num_balloons <- function(kgs_co2){
   balloons <- (v*0.001)/0.012
   return(balloons)
 }
-
-num_balloons(1)
 ```
 
 ```{r}
-co2 <- apps_ref
-co2$co2_kgs_per_unit_time <- co2$mean_kW*emissionFactor$factor[which(emissionFactor$location=="SWA")]
-co2$co2_kgs_per_use <- (co2$mean_kW*co2$per_use_multiplier)*emissionFactor$factor[which(emissionFactor$location=="SWA")]
-co2$balloons_per_use <- num_balloons(co2$co2_kgs_per_use)
+co2 <- read.csv("apps_ref.csv")
+# co2$co2_kgs_per_unit_time <- co2$mean_kW*emissionFactor$factor[which(emissionFactor$location=="SWA")]
+# co2$co2_kgs_per_use <- (co2$mean_kW*co2$per_use_multiplier)*emissionFactor$factor[which(emissionFactor$location=="SWA")]
+# co2$balloons_per_use <- num_balloons(co2$co2_kgs_per_use)
 
-co2
+# co2
 
-write.csv(co2, "apps_ref.csv", row.names = FALSE)
+# write.csv(co2, "apps_ref.csv", row.names = FALSE)
 
-data.frame("attribute_name" = c("co2_kgs_per_use","balloons_per_use"),
-             "data_type" = c("FLOAT","FLOAT"),
-             "attribute_description" = c("Amount CO2 emissions (kgs) per typical use of appliance",
-                                         "Number of balloons full of CO2 generated per typical use of appliance")) %>%
-  rbind(read.csv("apps_ref_attribute_notes.csv")) %>%
-  write.csv("apps_ref_attribute_notes.csv", row.names = FALSE)
+# data.frame("attribute_name" = c("co2_kgs_per_use","balloons_per_use"),
+#              "data_type" = c("FLOAT","FLOAT"),
+#              "attribute_description" = c("Amount CO2 emissions (kgs) per typical use of appliance",
+#                                          "Number of balloons full of CO2 generated per typical use of appliance")) %>%
+#   rbind(read.csv("apps_ref_attribute_notes.csv")) %>%
+#   write.csv("apps_ref_attribute_notes.csv", row.names = FALSE)
 
 ```
 
@@ -690,23 +688,26 @@ data <- data.frame("group" = as.factor(co2$category),
                    "subgroup" = as.factor(co2$app),
                    "num_balloons" = round((co2$balloons_per_use*
                                       co2$use_per_day),2))
-```
-
-```{r, fig.width=12, fig.height=7}
-
+data
 # basic treemap
 tree <- treemap(data[which(!is.na(data$num_balloons)),],
-        index=c("group","subgroup", "num_balloons"),
+        index=c("group","subgroup"),
         vSize="num_balloons",
         type="index",
         align.labels=list(
            c("center", "center"),
-           c("right", "bottom"),
-           c("left", "bottom")), title = "Expected number of balloons per day per appliance")
+           c("right", "bottom")))
+
+d3tree(tree,name = c("group", "subgroup"), value = "num_balloons")
+# # save the widget
+# library(htmlwidgets)
+# saveWidget(inter, file="interactiveTreemap.html")
 
 ```
 
+
 ```{r}
+data %>% summary
 data$co2kgs <- round((co2$co2_kgs_per_use*co2$use_per_day),2)
 data$hrs <- co2$hrs_per_use*co2$use_per_day
 plot(data$co2kgs~data$hrs)
@@ -716,6 +717,9 @@ sum(data$co2kgs, na.rm = TRUE)
 sum(data$num_balloons, na.rm = TRUE)
 ```
 
+```{r}
+
+```
 
 
 

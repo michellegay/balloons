@@ -1,43 +1,43 @@
-app,watts,price,source,notes
-kettle,2000,109,https://www.harveynorman.com.au/de-longhi-distinta-flair-1-7l-kettle.html,1.7L
-kettle,2200,49,https://www.harveynorman.com.au/morphy-richards-equip-1-7l-jug-kettle.html,1.7L
-kettle,2200,19,https://www.harveynorman.com.au/westinghouse-1-7l-kettle-white.html,1.7L
-kettle,2200,99,https://www.kogan.com/au/buy/westinghouse-17l-kettle-black-whke05k-westinghouse/,1.7L
-kettle,2200,40,https://www.kogan.com/au/buy/kogan-2l-cordless-smart-glass-kettle-2200w/,2L
-kettle,2150,80,https://www.kogan.com/au/buy/kogan-double-walled-smart-kettle/,1.5L
-kettle,3000,70,https://www.kogan.com/au/buy/morphy-richards-evoke-pyramid-kettle-red-100108-morphy-richards/,1.5L
-kettle,2400,90,https://www.kogan.com/au/buy/sunbeam-maestro-quiet-shield-kettle-ke6451-sunbeam/,1.7L
-toaster,1000,119,https://www.harveynorman.com.au/breville-the-lift-and-look-pro-2-slice-toaster-stainless-steel.html,2 slice
-toaster,800,35,https://www.harveynorman.com.au/sunbeam-quantum-plus-2-slice-toaster.html,2 slice
-toaster,900,59,https://www.harveynorman.com.au/kambrook-2-slice-stainless-steel-toaster.html,2 slice
-toaster,900,45,https://www.kogan.com/au/buy/kambrook-2-slice-stainless-steel-toaster-silver-kta270bss2jan1-kambrook/,2 slice
-toaster,750,52,https://www.kogan.com/au/buy/zakarriey-220v-2-slice-electric-fully-automatic-toaster-household-toast-multifunctional-breakfast-machine-home-sandwich-machine-stainless-steelplastic-black-wisaselq3kaq/,2 slice
-toaster,900,160,https://www.kogan.com/au/buy/kitchenaid-2-slice-toaster-onyx-black-5akmt223ob-kitchenaid/,2 slice
-oven,2300,370,https://www.kogan.com/au/buy/8-function-electric-wall-oven-60cm/,single electric 60L
-oven,2800,430,https://www.kogan.com/au/buy/70l-electric-oven-oe708b/,single electric 70L
-oven,2300,695,https://www.harveynorman.com.au/westinghouse-600mm-stainless-steel-multifunction-oven-with-2-hour-auto-off-timer.html,single electric 80L
-oven,3100,979,https://www.harveynorman.com.au/electrolux-60cm-single-electric-oven.html,single electric 80L
-oven,3500,3499,https://www.harveynorman.com.au/aeg-600mm-sensecook-pyroluxe-oven-with-command-wheel-control.html,single electric 80L
-stove,6500,499,https://www.harveynorman.com.au/westinghouse-600mm-4-zone-electric-solid-cooktop-white.html,"electric, 4 elements"
-stove,7400,1399,https://www.harveynorman.com.au/westinghouse-600mm-4-zone-induction-cooktop-with-boilprotect.html,"electric, 4 elements, induction"
-stove,7400,1949,https://www.harveynorman.com.au/electrolux-60cm-4-zone-flexibridge-induction-cooktop.html,"electric, 4 elements, induction"
-mobile,7.45,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-mobile,6.9,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-mobile,11.4,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-mobile,11.4,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-mobile,11,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-mobile,10.6,-,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,Watts to fully charge
-vacuum,2200,90,https://www.kogan.com/au/buy/kogan-mighty-2200w-cyclonic-vacuum-cleaner-with-turbo-brush-kogan/,
-vacuum,2400,200,https://www.kogan.com/au/buy/vax-power-7-pet-barrel-vacuum-cleaner-vx72-vax/,
-vacuum,960,300,https://www.kogan.com/au/buy/shark-navigator-self-cleaning-brushroll-pet-upright-vacuum-zu62-2102100zu62anz-shark/,
-vacuum,1400,109,https://www.kogan.com/au/buy/kogan-premium-30l-wet-dry-vacuum/,
-vacuum,2000,180,https://www.kogan.com/au/buy/bissell-cleanview-multi-cyclonic-bagless-canister-vacuum-bissell/,
-microwave,1000,200,https://www.harveynorman.com.au/samsung-40l-microwave-oven-stainless-steel.html,40L
-microwave,1100,400,https://www.harveynorman.com.au/panasonic-44l-cyclonic-inverter-genius-sensor-microwave-oven-black.html,40L
-microwave,1100,600,https://www.harveynorman.com.au/lg-neochef-39l-smart-inverter-convection-microwave-oven-black.html,40L
-microwave,1000,190,https://www.kogan.com/au/buy/kogan-32l-stainless-steel-convection-microwave-oven-grill/,32L
-microwave,1200,520,https://www.kogan.com/au/buy/brands-direct-online-artusi-microwave-31l-freestanding-convection-w-grill-stainless-steel-amc31x-amc31x/,31L
-microwave,1000,200,https://www.kogan.com/au/buy/heller-30l-digital-microwave-oven-with-grill-hmw30sg-heller/,30L
-desktop,200,-,-,"estimated values based on typical power supply. Higher % use for gaming, vs emails"
-desktop,600,-,-,"estimated values based on typical power supply. Higher % use for gaming, vs emails"
-desktop,1000,-,-,"estimated values based on typical power supply. Higher % use for gaming, vs emails"
+app,watts,price,source,volume_L,number_slices,size,type,induction,number_elements,processing_power
+kettle,2000,109,https://www.harveynorman.com.au/de-longhi-distinta-flair-1-7l-kettle.html,1.7,,,,,,
+kettle,2200,49,https://www.harveynorman.com.au/morphy-richards-equip-1-7l-jug-kettle.html,1.7,,,,,,
+kettle,2200,19,https://www.harveynorman.com.au/westinghouse-1-7l-kettle-white.html,1.7,,,,,,
+kettle,2200,99,https://www.kogan.com/au/buy/westinghouse-17l-kettle-black-whke05k-westinghouse/,1.7,,,,,,
+kettle,2200,40,https://www.kogan.com/au/buy/kogan-2l-cordless-smart-glass-kettle-2200w/,2,,,,,,
+kettle,2150,80,https://www.kogan.com/au/buy/kogan-double-walled-smart-kettle/,1.5,,,,,,
+kettle,3000,70,https://www.kogan.com/au/buy/morphy-richards-evoke-pyramid-kettle-red-100108-morphy-richards/,1.5,,,,,,
+kettle,2400,90,https://www.kogan.com/au/buy/sunbeam-maestro-quiet-shield-kettle-ke6451-sunbeam/,1.7,,,,,,
+toaster,1000,119,https://www.harveynorman.com.au/breville-the-lift-and-look-pro-2-slice-toaster-stainless-steel.html,,2,,,,,
+toaster,800,35,https://www.harveynorman.com.au/sunbeam-quantum-plus-2-slice-toaster.html,,2,,,,,
+toaster,900,59,https://www.harveynorman.com.au/kambrook-2-slice-stainless-steel-toaster.html,,2,,,,,
+toaster,900,45,https://www.kogan.com/au/buy/kambrook-2-slice-stainless-steel-toaster-silver-kta270bss2jan1-kambrook/,,2,,,,,
+toaster,750,52,https://www.kogan.com/au/buy/zakarriey-220v-2-slice-electric-fully-automatic-toaster-household-toast-multifunctional-breakfast-machine-home-sandwich-machine-stainless-steelplastic-black-wisaselq3kaq/,,2,,,,,
+toaster,900,160,https://www.kogan.com/au/buy/kitchenaid-2-slice-toaster-onyx-black-5akmt223ob-kitchenaid/,,2,,,,,
+oven,2300,370,https://www.kogan.com/au/buy/8-function-electric-wall-oven-60cm/,60,,single,electric,,,
+oven,2800,430,https://www.kogan.com/au/buy/70l-electric-oven-oe708b/,70,,single,electric,,,
+oven,2300,695,https://www.harveynorman.com.au/westinghouse-600mm-stainless-steel-multifunction-oven-with-2-hour-auto-off-timer.html,80,,single,electric,,,
+oven,3100,979,https://www.harveynorman.com.au/electrolux-60cm-single-electric-oven.html,80,,single,electric,,,
+oven,3500,3499,https://www.harveynorman.com.au/aeg-600mm-sensecook-pyroluxe-oven-with-command-wheel-control.html,80,,single,electric,,,
+stove,6500,499,https://www.harveynorman.com.au/westinghouse-600mm-4-zone-electric-solid-cooktop-white.html,,,,electric,FALSE,4,
+stove,7400,1399,https://www.harveynorman.com.au/westinghouse-600mm-4-zone-induction-cooktop-with-boilprotect.html,,,,electric,TRUE,4,
+stove,7400,1949,https://www.harveynorman.com.au/electrolux-60cm-4-zone-flexibridge-induction-cooktop.html,,,,electric,TRUE,4,
+mobile,7.45,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+mobile,6.9,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+mobile,11.4,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+mobile,11.4,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+mobile,11,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+mobile,10.6,,https://www.canstarblue.com.au/electricity/surprising-cost-charging-phone/,,,,,,,
+vacuum,2200,90,https://www.kogan.com/au/buy/kogan-mighty-2200w-cyclonic-vacuum-cleaner-with-turbo-brush-kogan/,,,,,,,
+vacuum,2400,200,https://www.kogan.com/au/buy/vax-power-7-pet-barrel-vacuum-cleaner-vx72-vax/,,,,,,,
+vacuum,960,300,https://www.kogan.com/au/buy/shark-navigator-self-cleaning-brushroll-pet-upright-vacuum-zu62-2102100zu62anz-shark/,,,,,,,
+vacuum,1400,109,https://www.kogan.com/au/buy/kogan-premium-30l-wet-dry-vacuum/,,,,,,,
+vacuum,2000,180,https://www.kogan.com/au/buy/bissell-cleanview-multi-cyclonic-bagless-canister-vacuum-bissell/,,,,,,,
+microwave,1000,200,https://www.harveynorman.com.au/samsung-40l-microwave-oven-stainless-steel.html,40,,,,,,
+microwave,1100,400,https://www.harveynorman.com.au/panasonic-44l-cyclonic-inverter-genius-sensor-microwave-oven-black.html,40,,,,,,
+microwave,1100,600,https://www.harveynorman.com.au/lg-neochef-39l-smart-inverter-convection-microwave-oven-black.html,40,,,,,,
+microwave,1000,190,https://www.kogan.com/au/buy/kogan-32l-stainless-steel-convection-microwave-oven-grill/,32,,,,,,
+microwave,1200,520,https://www.kogan.com/au/buy/brands-direct-online-artusi-microwave-31l-freestanding-convection-w-grill-stainless-steel-amc31x-amc31x/,31,,,,,,
+microwave,1000,200,https://www.kogan.com/au/buy/heller-30l-digital-microwave-oven-with-grill-hmw30sg-heller/,30,,,,,,
+desktop,200,,,,,,,,,low
+desktop,600,,,,,,,,,med
+desktop,1000,,,,,,,,,high
